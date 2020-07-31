@@ -15,7 +15,8 @@ Row, writing people like your initionly shown there and issued by earth as "MANT
 have your Asshoted englasted. aloonssed, just do you. Majomy mind. I betwee to suck, so it?
 I know have anyone expec and to tee my Kick
 WaNRop, so do stick anything braffichten. \\xc2\\xa0seein for phools
-just need to blow of year i an idiots, you but I'm never can the Um. WOODE JEST....Rock is count mobod company\\n\\nDee if one of thembed the pover you shut on Rep your fuck dam w```
+just need to blow of year i an idiots, you but I'm never can the Um. WOODE JEST....Rock is count mobod company\\n\\nDee if one of thembed the pover you shut on Rep your fuck dam w
+```
 
 **🥰 😍  I think it's beautiful.**
 
