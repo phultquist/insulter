@@ -184,22 +184,22 @@ def get_and_return(request):
   print(generated)
   return (generated)
 
-get_and_return('')
+# get_and_return('')
 
-# def run(server_class=HTTPServer, handler_class=BaseHTTPRequestHandler):
-#   server_address = ('localhost', 8000)
-#   httpd = server_class(server_address, handler_class)
-#   httpd.serve_forever()
+def run(server_class=HTTPServer, handler_class=BaseHTTPRequestHandler):
+  server_address = ('localhost', 8000)
+  httpd = server_class(server_address, handler_class)
+  httpd.serve_forever()
 
-# class Handler(BaseHTTPRequestHandler):
-#     def do_GET(self):
-#         self.send_response(200)
-#         self.send_header("content-type", "text/plain")
-#         self.end_headers()
-#         message = get_and_return('')
-#         self.wfile.write(message.encode())
+class Handler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header("content-type", "text/plain")
+        self.end_headers()
+        message = get_and_return('')
+        self.wfile.write(message.encode())
 
-#     def do_POST(self):
-#         print(self.rfile.read())
+    def do_POST(self):
+        print(self.rfile.read())
 
-# run(handler_class=Handler)
+run(handler_class=Handler)
