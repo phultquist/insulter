@@ -1,4 +1,4 @@
-# `fuckyou`, the Machine Learning insult generator
+# `insult-generator`, the Machine Learning insult generator
 
 ## About
 This is an example adapted from a tensorflow tutorial. The original example used Shakespeare, but that was too... boring
