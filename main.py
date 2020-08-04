@@ -103,7 +103,7 @@ example_batch_loss  = loss(target_example_batch, example_batch_predictions)
 
 model.compile(optimizer='adam', loss=loss)
 
-checkpoint_dir = '/home/patrick_hultquist/insult-generator/training_checkpoints'
+checkpoint_dir = './training_checkpoints'
 print(checkpoint_dir)
 checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt_{epoch}")
 
