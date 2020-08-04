@@ -17,6 +17,8 @@ import tensorflow as tf
 import numpy as np
 import os
 import time
+import urllib
+from http.server import BaseHTTPRequestHandler,HTTPServer
 
 path_to_file = tf.keras.utils.get_file('KTSlgmXCNv.txt', 'https://storage.googleapis.com/file-in.appspot.com/files/KTSlgmXCNv.txt')
 
@@ -121,7 +123,7 @@ model.build(tf.TensorShape([1, None]))
 
 def generate_text(model, start_string, num_chars):
   num_generate = num_chars
-
+  print('line 125')
   # Converting our start string to numbers (vectorizing)
   input_eval = [char2idx[s] for s in start_string]
   input_eval = tf.expand_dims(input_eval, 0)
@@ -133,36 +135,68 @@ def generate_text(model, start_string, num_chars):
   # Higher temperatures results in more surprising text.
   # Experiment to find the best setting.
   temperature = 0.3
+  print('line 137')
 
   # Here batch size == 1
   model.reset_states()
+  print('line 141')
+  print(input_eval)
   for i in range(num_generate):
+      # print('line 143 i='+str(i))
       predictions = model(input_eval)
-      # remove the batch dimension
+      # print('line 145 i='+str(i))
       predictions = tf.squeeze(predictions, 0)
+      # print('line 147 i='+str(i))
 
       # using a categorical distribution to predict the character returned by the model
       predictions = predictions / temperature
       predicted_id = tf.random.categorical(predictions, num_samples=1)[-1,0].numpy()
+      # print('line 152 i='+str(i))
 
       # We pass the predicted character as the next input to the model
       # along with the previous hidden state
       input_eval = tf.expand_dims([predicted_id], 0)
+      # print('line 157 i='+str(i))
 
       text_generated.append(idx2char[predicted_id])
 
   return (start_string + ''.join(text_generated))
 
-def complete():
-  generated = generate_text(model, start_string=u"Sex", num_chars=500)
+def get_and_return(request):
+  # start = request.args['text']
+  start = u"i really think that you are "
+  print(start)
+  start = urllib.parse.unquote(start)
+  generated = generate_text(model, start_string=str(start), num_chars=50)
+
+  print(generated)
+
   generated = generated.replace('\\n', '\n')
   generated = generated.replace('\\x', ' ')
 
   #really bad words
-  generated = generated.replace('retard', '******')
-  generated = generated.replace('cunt', '****')
-  generated = generated.replace('nigg', '****')
+  generated = generated.replace('retard', 'r****d')
+  generated = generated.replace('cunt', 'c**t')
+  generated = generated.replace('nigg', 'n***')
+  generated = generated.replace('fag', 'f*g')
 
   print(generated)
+  return (generated)
 
-complete()
+def run(server_class=HTTPServer, handler_class=BaseHTTPRequestHandler):
+  server_address = ('localhost', 8000)
+  httpd = server_class(server_address, handler_class)
+  httpd.serve_forever()
+
+class Handler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header("content-type", "text/plain")
+        self.end_headers()
+        message = get_and_return('')
+        self.wfile.write(message.encode())
+
+    def do_POST(self):
+        print(self.rfile.read())
+
+run(handler_class=Handler)
