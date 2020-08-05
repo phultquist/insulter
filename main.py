@@ -165,7 +165,7 @@ def generate_text(model, start_string, num_chars):
 
 def get_and_return(request):
   # start = request.args['text']
-  start = u"i really think that you are "
+  start = u"i think 1231231231231232213312"
   print(start)
   start = urllib.parse.unquote(start)
   generated = generate_text(model, start_string=str(start), num_chars=50)
@@ -185,21 +185,3 @@ def get_and_return(request):
   return (generated)
 
 # get_and_return('')
-
-def run(server_class=HTTPServer, handler_class=BaseHTTPRequestHandler):
-  server_address = ('localhost', 8000)
-  httpd = server_class(server_address, handler_class)
-  httpd.serve_forever()
-
-class Handler(BaseHTTPRequestHandler):
-    def do_GET(self):
-        self.send_response(200)
-        self.send_header("content-type", "text/plain")
-        self.end_headers()
-        message = get_and_return('')
-        self.wfile.write(message.encode())
-
-    def do_POST(self):
-        print(self.rfile.read())
-
-run(handler_class=Handler)
