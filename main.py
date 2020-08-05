@@ -164,8 +164,8 @@ def generate_text(model, start_string, num_chars):
   return (start_string + ''.join(text_generated))
 
 def get_and_return(request):
-  # start = request.args['text']
-  start = u"i think 1231231231231232213312"
+  start = request.args['text']
+  # start = u"i think 1231231231231232213312"
   print(start)
   start = urllib.parse.unquote(start)
   generated = generate_text(model, start_string=str(start), num_chars=50)
